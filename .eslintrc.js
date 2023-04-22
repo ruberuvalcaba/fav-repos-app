@@ -1,31 +1,24 @@
 module.exports = {
+  root: true,
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'prettier',
+    'plugin:prettier/recommended',
+  ],
   env: {
     browser: true,
-    commonjs: true,
-    es2021: true
+    node: true,
+    es6: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'standard-with-typescript',
-    'prettier'
-  ],
-  overrides: [
-  ],
-  parserOptions: {
-    ecmaVersion: 'latest'
-  },
-  plugins: [
-    'react'
-  ],
   rules: {
     'no-empty-function': 'off',
-    "no-var": "error",
-    "semi": "error",
-    "indent": "error",
-    "no-multi-spaces": "error",
-    "space-in-parens": "error",
-    "no-multiple-empty-lines": "error",
-    "prefer-const": "error",
-    "no-use-before-define": "error"
-  }
+    '@typescript-eslint/no-empty-function': ['off'],
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-var-requires': 0,
+    'no-console': [2, { allow: ['warn', 'error'] }],
+  },
 }
