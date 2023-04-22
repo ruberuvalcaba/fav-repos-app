@@ -10,6 +10,7 @@
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
+    "composite": true,
     "typeRoots": ["./typings", "./node_modules/@types"],
     "outDir": "dist"
   },

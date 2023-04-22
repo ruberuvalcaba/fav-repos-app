@@ -1,10 +1,12 @@
 import React from 'react'
-import './App.css'
+import { ChakraProvider } from '@chakra-ui/react'
 import FavReposManager from './views/FavReposManager'
 
 function App() {
   return (
-    <FavReposManager/>
+    <ChakraProvider>
+      <FavReposManager />
+    </ChakraProvider>
   )
 }
 
