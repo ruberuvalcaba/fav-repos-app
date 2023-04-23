@@ -25,7 +25,7 @@ const FavReposManager = (): JSX.Element => {
         alignItems="center"
         textAlign="center"
       >
-        Collection of your favorite GitHub Repos
+        Search and Collect your favorite GitHub Repos
       </GridItem>
       <GridItem p="8" bg="gray.50" area={'nav'}>
         <SearchRepo />

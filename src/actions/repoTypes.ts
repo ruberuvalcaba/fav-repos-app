@@ -1,0 +1,2 @@
+export const ADD_REPO_SUCCESS = 'ADD_REPO_SUCCESS'
+export const ADD_REPO_FAILURE = 'ADD_REPO_FAILURE'

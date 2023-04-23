@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Container, Input, Box, Spinner } from '@chakra-ui/react'
 import { SearchIcon, CloseIcon } from '@chakra-ui/icons'
 import SearchRepoResults from './RepoSearchResults'
+import { RepoContext } from '../../store/ReposStore'
 import API from '../../api'
 import useDebounce from '../../hooks/useDebounce'
-import { Repo } from '../../types'
+import { Repo, RepoPayload } from '../../types'
 
 const SearchRepo = (): JSX.Element => {
   const [searchValue, setSearchValue] = useState<string>('')
   const [reposList, setReposList] = useState<Repo[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { actions } = useContext(RepoContext)
   const debouncedSearchValue = useDebounce(searchValue, 400)
 
   const searchRepos = async () => {
@@ -17,9 +19,19 @@ const SearchRepo = (): JSX.Element => {
     const results = await API.searchAll(searchValue)
 
     if (results?.length) {
-      const formattedResults = results.map((item: Repo) => {
-        const { id, name, description, created_at, stargazers_count, language } = item
-        return { id, name, description, created_at, stargazers_count, language }
+      const formattedResults = results.map((item: RepoPayload) => {
+        const { id, name, full_name, description, url, created_at, stargazers_count, language } =
+          item
+        return {
+          id: id.toString(),
+          name,
+          fullName: full_name,
+          description,
+          url,
+          createdAt: created_at,
+          stargazersCount: stargazers_count,
+          language,
+        }
       })
       setReposList(formattedResults)
     }
@@ -33,6 +45,12 @@ const SearchRepo = (): JSX.Element => {
 
   const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value)
+  }
+
+  const handleSelection = async (repo: Repo) => {
+    const response = await actions.addRepo(repo)
+    if (response?.status === 200)
+      setReposList(reposList.filter((item: Repo) => item.id !== repo.id)) //Removes selected repo from dropdown list
   }
 
   const handleClearSearch = () => {
@@ -68,7 +86,9 @@ const SearchRepo = (): JSX.Element => {
           <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
         </Box>
       )}
-      {reposList?.length > 0 && !isLoading && <SearchRepoResults reposList={reposList} />}
+      {reposList?.length > 0 && !isLoading && (
+        <SearchRepoResults reposList={reposList} onSelect={handleSelection} />
+      )}
     </Container>
   )
 }

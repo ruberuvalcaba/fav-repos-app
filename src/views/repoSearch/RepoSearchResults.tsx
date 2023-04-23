@@ -3,7 +3,13 @@ import { Box, List, ListItem, Text } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
 import { Repo } from '../../types'
 
-const SearchRepoResults = ({ reposList }: { reposList: Repo[] }): JSX.Element => {
+interface SearchRepoResultsProps {
+  reposList: Repo[]
+  onSelect: (repo: Repo) => void
+}
+
+const SearchRepoResults = (props: SearchRepoResultsProps): JSX.Element => {
+  const { reposList, onSelect } = props
   return (
     <Box
       mt={1}
@@ -25,6 +31,7 @@ const SearchRepoResults = ({ reposList }: { reposList: Repo[] }): JSX.Element =>
                 cursor: 'pointer',
                 borderRadius: '5px',
               }}
+              onClick={() => onSelect(repo)}
             >
               <Text fontSize="sm" color="blackAlpha.900">
                 {repo.name}
@@ -41,7 +48,7 @@ const SearchRepoResults = ({ reposList }: { reposList: Repo[] }): JSX.Element =>
                   <Box display="flex" alignItems="center">
                     <StarIcon w={4} h={4} color="gray.300" mr={1} />
                     <Text fontSize="2xs" color="blackAlpha.700">
-                      {repo.stargazers_count}
+                      {repo.stargazersCount}
                     </Text>
                   </Box>
                 </Box>
