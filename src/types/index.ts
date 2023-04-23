@@ -10,18 +10,13 @@ export interface RepoPayload {
 }
 export interface Repo {
   id: string
-  name: string
+  name?: string
   fullName: string
-  description: string | null
+  description?: string | null
   language: string | null
   stargazersCount: number
   url: string
   createdAt: Date
-}
-export interface GenericResponse {
-  status: number
-  statusText: string
-  type: string
 }
 export interface State {
   reposList: Repo[]

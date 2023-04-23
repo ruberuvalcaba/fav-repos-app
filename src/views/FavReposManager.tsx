@@ -10,11 +10,10 @@ const FavReposManager = (): JSX.Element => {
                   "nav main"
                   "nav footer"`}
       gridTemplateRows={'50px 1fr 30px'}
-      gridTemplateColumns={'450px 1fr'}
+      gridTemplateColumns={'400px 1fr'}
       h="100vh"
       gap="1"
       color="blackAlpha.700"
-      fontWeight="bold"
     >
       <GridItem
         p="4"
@@ -27,10 +26,10 @@ const FavReposManager = (): JSX.Element => {
       >
         Search and Collect your favorite GitHub Repos
       </GridItem>
-      <GridItem p="8" bg="gray.50" area={'nav'}>
+      <GridItem bg="gray.50" area={'nav'}>
         <SearchRepo />
       </GridItem>
-      <GridItem p="8" bg="white.300" area={'main'}>
+      <GridItem p="8" bg="white" area={'main'} overflow="auto">
         <RepoLibrary />
       </GridItem>
       <GridItem px="4" py="2" bg="gray.50" area={'footer'}>

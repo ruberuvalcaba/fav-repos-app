@@ -1,5 +1,5 @@
 import { Octokit } from 'octokit'
-import { Repo, GenericResponse } from '../types'
+import { Repo } from '../types'
 
 const api = async ({
   isSearch = false,
@@ -36,7 +36,7 @@ const api = async ({
       }
       const response = await fetch(apiUrl, fetchOptions)
 
-      return response
+      return response.json()
     }
   } catch (error) {
     console.error('ERROR:', error)
@@ -56,7 +56,18 @@ const API = (() => {
       })
       return response?.items
     },
-    async addRepo(repoPayload: Repo): Promise<GenericResponse> {
+    async getReposList(): Promise<Repo> {
+      const response = await api({
+        apiUrl: 'http://localhost:8080/repo/',
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      return response.repos
+    },
+    async addRepo(repoPayload: Repo): Promise<Repo> {
       const response = await api({
         apiUrl: 'http://localhost:8080/repo/',
         method: 'POST',

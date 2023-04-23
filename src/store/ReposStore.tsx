@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react'
 import * as types from '../actions/repoTypes'
 import { useRepoActions } from '../actions'
-import { Repo, State, Dispatch, GenericResponse } from '../types'
+import { Repo, State, Dispatch } from '../types'
 
 interface ProviderProps {
   children: JSX.Element
@@ -13,7 +13,10 @@ const initialState = {
 
 const contextIntialState = {
   actions: {
-    addRepo: (params: Repo): Promise<GenericResponse> => {
+    addRepo: (params: Repo): Promise<Repo> => {
+      return
+    },
+    getReposList: (): Promise<Repo> => {
       return
     },
   },
@@ -32,7 +35,14 @@ const reducer = (state: State, action: Dispatch) => {
         reposList: [...reposList, action.value],
       }
     }
+    case types.GET_REPO_LIST_SUCCESS: {
+      return {
+        ...state,
+        reposList: action.value,
+      }
+    }
     case types.ADD_REPO_FAILURE:
+    case types.GET_REPO_LIST_FAILURE:
       return {
         ...state,
         error: action.error,
