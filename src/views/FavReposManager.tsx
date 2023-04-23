@@ -1,5 +1,7 @@
 import React from 'react'
-import { Grid, GridItem } from '@chakra-ui/react'
+import { Grid, GridItem, Text } from '@chakra-ui/react'
+import SearchRepo from './repoSearch/RepoSearch'
+import RepoLibrary from './repoLibrary/RepoLibrary'
 
 const FavReposManager = (): JSX.Element => {
   return (
@@ -8,23 +10,33 @@ const FavReposManager = (): JSX.Element => {
                   "nav main"
                   "nav footer"`}
       gridTemplateRows={'50px 1fr 30px'}
-      gridTemplateColumns={'150px 1fr'}
-      h="200px"
+      gridTemplateColumns={'450px 1fr'}
+      h="100vh"
       gap="1"
       color="blackAlpha.700"
       fontWeight="bold"
     >
-      <GridItem pl="2" bg="orange.300" area={'header'}>
-        Header
+      <GridItem
+        p="4"
+        bg="gray.700"
+        color="white"
+        area={'header'}
+        display="flex"
+        alignItems="center"
+        textAlign="center"
+      >
+        Collection of your favorite GitHub Repos
       </GridItem>
-      <GridItem pl="2" bg="pink.300" area={'nav'}>
-        Nav
+      <GridItem p="8" bg="gray.50" area={'nav'}>
+        <SearchRepo />
       </GridItem>
-      <GridItem pl="2" bg="green.300" area={'main'}>
-        Main
+      <GridItem p="8" bg="white.300" area={'main'}>
+        <RepoLibrary />
       </GridItem>
-      <GridItem pl="2" bg="blue.300" area={'footer'}>
-        Footer
+      <GridItem px="4" py="2" bg="gray.50" area={'footer'}>
+        <Text fontSize="2xs" color="blackAlpha.500">
+          JPMorgan Chase - The Infatuation | Take Home Challenge by Ruben Ruvalcaba
+        </Text>
       </GridItem>
     </Grid>
   )
