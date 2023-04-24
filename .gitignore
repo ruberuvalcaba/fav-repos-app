@@ -5,6 +5,8 @@
 
 # testing
 /coverage
+__snapshots__/
+
 
 # production
 /build
@@ -15,3 +17,6 @@
 
 yarn-debug.log*
 yarn-error.log*
+
+# bundles
+/dist/

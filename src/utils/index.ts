@@ -1,4 +1,5 @@
-export const formatDate = (date: Date) => {
+export const formatDate = (date: Date | undefined) => {
+  if (!date) return
   return new Date(date).toLocaleDateString('en-us', {
     year: 'numeric',
     month: 'short',

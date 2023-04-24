@@ -98,6 +98,7 @@ const SearchRepo = (): JSX.Element => {
       })
       // Saves selection to DB
     } else {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { name, description, ...restOfRepo } = repo
       const response = await actions.addRepo(restOfRepo)
       if (response?.id)
