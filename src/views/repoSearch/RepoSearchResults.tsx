@@ -13,7 +13,7 @@ const SearchRepoResults = (props: SearchRepoResultsProps): JSX.Element => {
     <Box
       mt={1}
       style={{
-        height: 'calc(100vh - 150px)',
+        height: 'calc(100vh - 165px)',
         overflow: 'auto',
         boxShadow: '0 2px 5px 0 rgba(0, 0, 0, 0.1)',
         borderRadius: '5px',
@@ -29,6 +29,9 @@ const SearchRepoResults = (props: SearchRepoResultsProps): JSX.Element => {
               style={{
                 cursor: 'pointer',
                 borderRadius: '5px',
+              }}
+              _hover={{
+                bg: 'gray.200',
               }}
               onClick={() => onSelect(repo)}
             >

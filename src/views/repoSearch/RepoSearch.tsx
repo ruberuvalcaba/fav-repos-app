@@ -13,7 +13,8 @@ const SearchRepo = (): JSX.Element => {
   const [searchValue, setSearchValue] = useState<string>('')
   const [reposListResults, setReposListResults] = useState<Repo[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [isAlertVisible, setIsAlertVisible] = useState(false)
+  const [isAlertVisible, setIsAlertVisible] = useState<boolean>(false)
+  const [alertInfo, setAlertInfo] = useState({ message: '', description: '' })
   const { state, actions } = useContext(RepoContext)
   const { reposList } = state
   const debouncedSearchValue = useDebounce(searchValue, 400)
@@ -54,10 +55,20 @@ const SearchRepo = (): JSX.Element => {
   const handleSelection = async (repo: Repo) => {
     if (reposList?.length >= 10) {
       setIsAlertVisible(true)
+      setAlertInfo({
+        message: 'Storage limit reached!',
+        description:
+          'Remove elements from the table to keep adding, you are allowed to add up to 10 items.',
+      })
+    } else if (reposList.find((item: Repo) => item.id === repo.id)) {
+      setIsAlertVisible(true)
+      setAlertInfo({
+        message: 'Duplicated Repository!',
+        description: 'This repository already exist, try adding a diffetent one.',
+      })
     } else {
       const { name, description, ...restOfRepo } = repo
       const response = await actions.addRepo(restOfRepo)
-
       if (response?.id)
         setReposListResults(reposListResults.filter((item: Repo) => item.id !== repo.id)) //Removes selected repo from dropdown list
     }
@@ -72,9 +83,8 @@ const SearchRepo = (): JSX.Element => {
     <>
       {isAlertVisible && (
         <AlertBar
-          message="Storage limit reached!"
-          description="Storage limit reached!
-          Remove elements from the table to keep adding, you are allowed to add up to 10 items."
+          message={alertInfo.message}
+          description={alertInfo.description}
           status="error"
           onClose={() => setIsAlertVisible(false)}
         />
