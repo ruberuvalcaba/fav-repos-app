@@ -10,12 +10,12 @@ interface SearchRepoResultsProps {
 const SearchRepoResults = ({ results, onSelect }: SearchRepoResultsProps): JSX.Element => {
   return (
     <Box
-      mt={1}
       style={{
         height: 'calc(100vh - 165px)',
         overflow: 'auto',
         boxShadow: '0 2px 5px 0 rgba(0, 0, 0, 0.1)',
-        borderRadius: '5px',
+        borderBottomLeftRadius: '5px',
+        borderBottomRightRadius: '5px',
       }}
     >
       <List spacing={3} py={3} px={3} bg="white">

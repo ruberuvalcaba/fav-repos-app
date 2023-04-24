@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Container, Input, Box, Spinner } from '@chakra-ui/react'
+import { Container, Input, Box, Spinner, Text } from '@chakra-ui/react'
 import { SearchIcon, CloseIcon } from '@chakra-ui/icons'
 import SearchRepoResults from './RepoSearchResults'
 import { RepoContext } from '../../store/ReposStore'
@@ -13,6 +13,7 @@ const SearchRepo = (): JSX.Element => {
   const [reposListResults, setReposListResults] = useState<Repo[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isAlertVisible, setIsAlertVisible] = useState<boolean>(false)
+  const [showNoResultsMessage, setShowNoResultsMessage] = useState(false)
   const [alertInfo, setAlertInfo] = useState({ message: '', description: '' })
   const { state, actions } = useContext(RepoContext)
   const { reposList } = state
@@ -21,11 +22,20 @@ const SearchRepo = (): JSX.Element => {
   /*
    * filters results to suggest a more accurate list of user input
    */
-  const filterAndFormatResults = (results: RepoPayload[]) => {
+  const filterAndFormatResults = (results: RepoPayload[]): Repo[] => {
     const searchInput = searchValue.trim()
-    const regex = new RegExp(`^${searchInput}`, 'i')
+    let regex: RegExp
+    try {
+      regex = new RegExp(`^${searchInput}`, 'i') //Prevents odd imputs ie. (#$&*#{{F/
+    } catch (e) {
+      console.error('Invalid search input')
+    }
     return results
-      .filter((item: RepoPayload) => regex.test(item.name) || regex.test(item.description))
+      .filter((item: RepoPayload) =>
+        regex
+          ? regex.test(item.name) || regex.test(item.description) || regex.test(item.full_name)
+          : item
+      )
       .map((item: RepoPayload) => {
         const { id, name, full_name, description, url, created_at, stargazers_count, language } =
           item || {}
@@ -40,6 +50,11 @@ const SearchRepo = (): JSX.Element => {
           language,
         }
       })
+      .sort((a: Repo, b: Repo) => {
+        const aValue = a.name as string
+        const bValue = b.name as string
+        return aValue.localeCompare(bValue)
+      })
   }
 
   const searchRepos = async () => {
@@ -47,7 +62,11 @@ const SearchRepo = (): JSX.Element => {
     const results = await API.searchAll(searchValue.trim())
 
     if (results?.length) {
-      setReposListResults(filterAndFormatResults(results))
+      const filteredResults = filterAndFormatResults(results)
+      setReposListResults(filteredResults)
+      setShowNoResultsMessage(filteredResults?.length === 0)
+    } else {
+      setShowNoResultsMessage(true)
     }
     setIsLoading(false)
   }
@@ -89,6 +108,7 @@ const SearchRepo = (): JSX.Element => {
   const handleClearSearch = () => {
     setSearchValue('')
     setReposListResults([])
+    setShowNoResultsMessage(false)
   }
 
   return (
@@ -132,6 +152,11 @@ const SearchRepo = (): JSX.Element => {
               color="blue.500"
               size="xl"
             />
+          </Box>
+        )}
+        {showNoResultsMessage && (
+          <Box display="flex" justifyContent="center" my={20}>
+            <Text fontSize="sm">No results where found for: '{searchValue}'</Text>
           </Box>
         )}
         {reposListResults?.length > 0 && !isLoading && (
