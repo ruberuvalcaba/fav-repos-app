@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react'
 import * as types from '../actions/repoTypes'
 import { useRepoActions } from '../actions'
-import { Repo, State, Dispatch, GenericResponse } from '../types'
+import { Repo, State, Dispatch, GenericResponse, SortOrder } from '../types'
 
 interface ProviderProps {
   children: JSX.Element
@@ -22,6 +22,7 @@ const contextIntialState = {
     removeRepo: (id: string): Promise<GenericResponse> => {
       return
     },
+    sortData: (data: Repo[], sortKey: keyof Repo, sortOrder: SortOrder) => {},
   },
   state: initialState,
 }
@@ -47,6 +48,12 @@ const reducer = (state: State, action: Dispatch) => {
       return {
         ...state,
         reposList: state.reposList.filter((repo: Repo) => repo.id !== action.value),
+      }
+    }
+    case types.SORT_REPO_LIST_COMPLETED: {
+      return {
+        ...state,
+        reposList: action.value,
       }
     }
     case types.GET_REPO_LIST_FAILURE:

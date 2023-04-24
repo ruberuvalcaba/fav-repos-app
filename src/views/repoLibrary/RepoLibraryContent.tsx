@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { ExternalLinkIcon, DeleteIcon } from '@chakra-ui/icons'
-import { Tbody, Tr, Td, Link, Text } from '@chakra-ui/react'
+import { Tbody, Tr, Td, Link, Text, Box } from '@chakra-ui/react'
 import { RepoContext } from '../../store/ReposStore'
 import { Repo } from '../../types'
 import { formatDate } from '../../utils'
@@ -29,14 +29,14 @@ const RepoLibraryContent = ({
           return (
             <Tr key={repo.id}>
               <Td>
-                <TextWithEllipsis>{repo.fullName}</TextWithEllipsis>
+                <TextWithEllipsis width="300px">{repo.fullName}</TextWithEllipsis>
               </Td>
               <Td>
                 <Text fontSize="xs">{repo.language}</Text>
               </Td>
               <Td>
                 <Link href={repo.url} isExternal>
-                  <TextWithEllipsis>
+                  <TextWithEllipsis width="200px">
                     <ExternalLinkIcon mr={1} />
                     {repo.url}
                   </TextWithEllipsis>
@@ -46,16 +46,20 @@ const RepoLibraryContent = ({
                 <Text fontSize="xs">{formatDate(repo.createdAt)}</Text>
               </Td>
               <Td isNumeric>
-                <StarsCount stars={repo.stargazersCount} />
+                <StarsCount stars={repo.stargazersCount || 0} />
               </Td>
-              <Td display="flex" justifyContent="center" cursor="pointer">
-                <DeleteIcon
-                  onClick={() => onRemoveRepo(repo.id)}
-                  color="gray.400"
-                  _hover={{
-                    color: 'gray.600',
-                  }}
-                />
+              <Td cursor="pointer" px={0}>
+                <Box display="flex" justifyContent="center">
+                  <DeleteIcon
+                    onClick={() => onRemoveRepo(repo.id)}
+                    color="gray.400"
+                    w={4}
+                    h={4}
+                    _hover={{
+                      color: 'gray.600',
+                    }}
+                  />
+                </Box>
               </Td>
             </Tr>
           )

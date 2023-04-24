@@ -31,3 +31,5 @@ export interface Dispatch {
   value?: any
   error?: string
 }
+
+export type SortOrder = 'asc' | 'desc'

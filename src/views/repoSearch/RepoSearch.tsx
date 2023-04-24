@@ -52,7 +52,7 @@ const SearchRepo = (): JSX.Element => {
     setSearchValue(event.target.value)
   }
 
-  const handleSelection = async (repo: Repo) => {
+  const handleAdd = async (repo: Repo) => {
     if (reposList?.length >= 10) {
       setIsAlertVisible(true)
       setAlertInfo({
@@ -123,7 +123,7 @@ const SearchRepo = (): JSX.Element => {
           </Box>
         )}
         {reposListResults?.length > 0 && !isLoading && (
-          <SearchRepoResults results={reposListResults} onSelect={handleSelection} />
+          <SearchRepoResults results={reposListResults} onSelect={handleAdd} />
         )}
       </Container>
     </>
