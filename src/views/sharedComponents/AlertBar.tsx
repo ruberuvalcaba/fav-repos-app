@@ -8,8 +8,12 @@ interface AlertBarProps {
   onClose: () => void
 }
 
-const AlertBar = (props: AlertBarProps): JSX.Element => {
-  const { message, status = 'error', description, onClose } = props
+const AlertBar = ({
+  message,
+  status = 'error',
+  description,
+  onClose,
+}: AlertBarProps): JSX.Element => {
   return (
     <Alert
       status={status}

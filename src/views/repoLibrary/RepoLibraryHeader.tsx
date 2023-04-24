@@ -6,8 +6,7 @@ interface RepoLibraryHeaderProps {
   onSort: (sortKey: keyof Repo) => void
   isAscSortOrder: boolean
 }
-const RepoLibraryHeader = (props: RepoLibraryHeaderProps): JSX.Element => {
-  const { onSort, isAscSortOrder } = props
+const RepoLibraryHeader = ({ onSort, isAscSortOrder }: RepoLibraryHeaderProps): JSX.Element => {
   const [activeColumn, setActiveColumn] = useState<string>('')
   const SortIcon = isAscSortOrder ? <ChevronDownIcon /> : <ChevronUpIcon />
 

@@ -7,8 +7,7 @@ interface SearchRepoResultsProps {
   onSelect: (repo: Repo) => void
 }
 
-const SearchRepoResults = (props: SearchRepoResultsProps): JSX.Element => {
-  const { results, onSelect } = props
+const SearchRepoResults = ({ results, onSelect }: SearchRepoResultsProps): JSX.Element => {
   return (
     <Box
       mt={1}

@@ -15,8 +15,7 @@ interface AlertBarProps {
   onAccept: () => void
 }
 
-const DeleteAlert = (props: AlertBarProps): JSX.Element => {
-  const { isOpen, onClose, onAccept } = props
+const DeleteAlert = ({ isOpen, onClose, onAccept }: AlertBarProps): JSX.Element => {
   const cancelRef = useRef()
 
   return (

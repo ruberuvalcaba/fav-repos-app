@@ -48,8 +48,9 @@ export default (dispatch: any) => {
     }
   }
   const sortData = (data: Repo[], sortKey: keyof Repo, sortOrder: SortOrder) => {
+    // Using sort() due to low data processing otherwise would have used another sorting method.
     const sortedData = [...data].sort((a: Repo, b: Repo) => {
-      const aValue = (a[sortKey] || 0) as any // 0 because stars count = 0 are not saved to DB
+      const aValue = (a[sortKey] || 0) as any // 0 because stars count = 0 are not saved to DB for some reason.
       const bValue = (b[sortKey] || 0) as any
 
       if (typeof aValue === 'string' && typeof bValue === 'string') {
