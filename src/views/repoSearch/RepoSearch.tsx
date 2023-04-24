@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Container, Input, Box, Spinner } from '@chakra-ui/react'
-
 import { SearchIcon, CloseIcon } from '@chakra-ui/icons'
 import SearchRepoResults from './RepoSearchResults'
 import { RepoContext } from '../../store/ReposStore'
@@ -19,14 +18,17 @@ const SearchRepo = (): JSX.Element => {
   const { reposList } = state
   const debouncedSearchValue = useDebounce(searchValue, 400)
 
-  const searchRepos = async () => {
-    setIsLoading(true)
-    const results = await API.searchAll(searchValue)
-
-    if (results?.length) {
-      const formattedResults = results.map((item: RepoPayload) => {
+  /*
+   * filters results to suggest a more accurate list of user input
+   */
+  const filterAndFormatResults = (results: RepoPayload[]) => {
+    const searchInput = searchValue.trim()
+    const regex = new RegExp(`^${searchInput}`, 'i')
+    return results
+      .filter((item: RepoPayload) => regex.test(item.name) || regex.test(item.description))
+      .map((item: RepoPayload) => {
         const { id, name, full_name, description, url, created_at, stargazers_count, language } =
-          item
+          item || {}
         return {
           id: id.toString(),
           name,
@@ -38,14 +40,21 @@ const SearchRepo = (): JSX.Element => {
           language,
         }
       })
-      setReposListResults(formattedResults)
+  }
+
+  const searchRepos = async () => {
+    setIsLoading(true)
+    const results = await API.searchAll(searchValue.trim())
+
+    if (results?.length) {
+      setReposListResults(filterAndFormatResults(results))
     }
     setIsLoading(false)
   }
 
   // Search for repos based on user's search value after debounce timer
   useEffect(() => {
-    if (searchValue.trim()) searchRepos()
+    if (searchValue.trim()?.length > 0) searchRepos() //Makes sure no to search an empty value
   }, [debouncedSearchValue])
 
   const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +62,7 @@ const SearchRepo = (): JSX.Element => {
   }
 
   const handleAdd = async (repo: Repo) => {
+    //Storage limit validation
     if (reposList?.length >= 10) {
       setIsAlertVisible(true)
       setAlertInfo({
@@ -60,12 +70,14 @@ const SearchRepo = (): JSX.Element => {
         description:
           'Remove elements from the table to keep adding, you are allowed to add up to 10 items.',
       })
-    } else if (reposList.find((item: Repo) => item.id === repo.id)) {
+      //Duplicates validation
+    } else if (reposList?.length && reposList.find((item: Repo) => item.id === repo.id)) {
       setIsAlertVisible(true)
       setAlertInfo({
         message: 'Duplicated Repository!',
         description: 'This repository already exist, try adding a diffetent one.',
       })
+      // Saves selection to DB
     } else {
       const { name, description, ...restOfRepo } = repo
       const response = await actions.addRepo(restOfRepo)
