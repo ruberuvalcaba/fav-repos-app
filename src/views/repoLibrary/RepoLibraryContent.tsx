@@ -6,7 +6,11 @@ import { Repo } from '../../types'
 import { formatDate } from '../../utils'
 import { StarsCount, TextWithEllipsis } from '../sharedComponents'
 
-const RepoLibraryContent = (): JSX.Element => {
+const RepoLibraryContent = ({
+  onRemoveRepo,
+}: {
+  onRemoveRepo: (id: string) => void
+}): JSX.Element => {
   const { state, actions } = useContext(RepoContext)
   const { reposList } = state
   const hasData = reposList?.length > 0
@@ -46,6 +50,7 @@ const RepoLibraryContent = (): JSX.Element => {
               </Td>
               <Td display="flex" justifyContent="center" cursor="pointer">
                 <DeleteIcon
+                  onClick={() => onRemoveRepo(repo.id)}
                   color="gray.400"
                   _hover={{
                     color: 'gray.600',

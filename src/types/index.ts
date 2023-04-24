@@ -18,6 +18,11 @@ export interface Repo {
   url: string
   createdAt: Date
 }
+export interface GenericResponse {
+  status: number
+  statusText: string
+  type: string
+}
 export interface State {
   reposList: Repo[]
 }

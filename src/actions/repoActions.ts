@@ -23,7 +23,7 @@ export default (dispatch: any) => {
       if (response?.id) {
         dispatch({
           type: types.ADD_REPO_SUCCESS,
-          value: payload,
+          value: response,
         })
       }
       return response
@@ -32,9 +32,25 @@ export default (dispatch: any) => {
       throw error
     }
   }
+  const removeRepo = async (id: string) => {
+    try {
+      const response = await API.removeRepo(id)
+      if (response?.status === 200) {
+        dispatch({
+          type: types.REMOVE_REPO_SUCCESS,
+          value: id,
+        })
+      }
+      return response
+    } catch (error) {
+      dispatch({ type: types.REMOVE_REPO_FAILURE, error })
+      throw error
+    }
+  }
 
   return {
     addRepo,
     getReposList,
+    removeRepo,
   }
 }

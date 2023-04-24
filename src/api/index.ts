@@ -1,23 +1,22 @@
 import { Octokit } from 'octokit'
-import { Repo } from '../types'
+import { Repo, GenericResponse } from '../types'
 
 const api = async ({
   isSearch = false,
-  apiUrl,
+  subRoute = '',
   variables,
   method,
-  headers,
   body,
 }: {
   isSearch?: boolean
-  apiUrl: string
+  subRoute?: string
   variables?: { q: string }
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
-  headers?: any
   body?: any
 }): Promise<any> => {
   try {
     if (isSearch) {
+      const apiUrl = 'GET /search/repositories'
       const octokit = new Octokit({
         auth: process.env.GITHUB_TOKEN,
       })
@@ -26,17 +25,21 @@ const api = async ({
       })
       return result.data
     } else {
+      const apiUrl = `http://localhost:8080/repo/${subRoute}`
+
       const fetchOptions = {
         method,
-        headers,
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(body),
       }
-      if (method === 'GET') {
+      if (method === 'GET' || method === 'DELETE') {
         delete fetchOptions.body
       }
       const response = await fetch(apiUrl, fetchOptions)
 
-      return response.json()
+      return method !== 'DELETE' ? response.json() : response
     }
   } catch (error) {
     console.error('ERROR:', error)
@@ -48,7 +51,6 @@ const API = (() => {
   return {
     async searchAll(searchTerm: string): Promise<any> {
       const response = await api({
-        apiUrl: 'GET /search/repositories',
         isSearch: true,
         variables: {
           q: searchTerm,
@@ -58,25 +60,24 @@ const API = (() => {
     },
     async getReposList(): Promise<Repo> {
       const response = await api({
-        apiUrl: 'http://localhost:8080/repo/',
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
       })
 
       return response.repos
     },
     async addRepo(repoPayload: Repo): Promise<Repo> {
       const response = await api({
-        apiUrl: 'http://localhost:8080/repo/',
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: repoPayload,
       })
 
+      return response
+    },
+    async removeRepo(id: string): Promise<GenericResponse> {
+      const response = await api({
+        method: 'DELETE',
+        subRoute: id,
+      })
       return response
     },
   }
