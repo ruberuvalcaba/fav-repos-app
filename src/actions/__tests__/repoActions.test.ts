@@ -1,7 +1,7 @@
 import repoActions from '../repoActions'
 import * as types from '../actionTypes'
 import API from '../../api'
-import { Repo, SortOrder } from '../../types'
+import { Repo, RepoPayload, SortOrder } from '../../types'
 
 describe('repoActions module', () => {
   test('repoActions module should return an object literal', () => {
@@ -16,7 +16,38 @@ describe('repoActions module', () => {
 
   describe('getReposList', () => {
     it('should dispatch GET_REPO_LIST_SUCCESS action and return results', async () => {
-      const results = ['repo1', 'repo2', 'repo3']
+      const results: RepoPayload[] = [
+        {
+          id: '123',
+          name: 'test 1',
+          full_name: 'testing full 1',
+          description: 'this is a test',
+          url: 'https://test.com/1',
+          created_at: new Date('2022-11-11T12:17:27Z'),
+          stargazers_count: 0,
+          language: 'Javascript',
+        },
+        {
+          id: '1234',
+          name: 'test 2',
+          full_name: 'testing full 2',
+          description: 'this is a test 1',
+          url: 'https://test.com/2',
+          created_at: new Date('2023-11-11T12:17:27Z'),
+          stargazers_count: 7890,
+          language: 'Javascript',
+        },
+        {
+          id: '1235',
+          name: 'test 3',
+          full_name: 'testing full 3',
+          description: 'this is a test 3',
+          url: 'https://test.com/3',
+          created_at: new Date('2018-11-11T12:17:27Z'),
+          stargazers_count: 10,
+          language: 'Javascript',
+        },
+      ]
       const dispatch = jest.fn()
       API.getReposList = jest.fn().mockResolvedValue(results)
 
