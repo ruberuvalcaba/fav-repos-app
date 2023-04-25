@@ -4,14 +4,11 @@ FROM node:16.14.0
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the package.json and package-lock.json files to the container
-COPY package.json yarn.lock ./
+# Copy application files to the container
+COPY . .
 
 # Install dependencies
 RUN yarn install
-
-# Copy the rest of the application files to the container
-COPY . .
 
 # Build the TypeScript code
 RUN yarn build
