@@ -5,7 +5,7 @@ import SearchRepoResults from './RepoSearchResults'
 import { RepoContext } from '../../store/ReposStore'
 import API from '../../api'
 import useDebounce from '../../hooks/useDebounce'
-import { Repo, RepoPayload } from '../../types'
+import { Repo, RepoPayload, AlerBarStatus } from '../../types'
 import { AlertBar } from '../sharedComponents'
 
 const SearchRepo = (): JSX.Element => {
@@ -15,7 +15,11 @@ const SearchRepo = (): JSX.Element => {
   const [isAlertVisible, setIsAlertVisible] = useState<boolean>(false)
   const [showNoResultsMessage, setShowNoResultsMessage] = useState<boolean>(false)
   const [isServerRunning, setIsServerRunning] = useState<boolean>(false)
-  const [alertInfo, setAlertInfo] = useState({ message: '', description: '' })
+  const [alertInfo, setAlertInfo] = useState<{
+    message: string
+    description?: string
+    status: AlerBarStatus
+  }>({ message: '', description: '', status: 'success' })
   const { state, actions } = useContext(RepoContext)
   const { reposList } = state
   const debouncedSearchValue = useDebounce(searchValue, 400)
@@ -43,7 +47,7 @@ const SearchRepo = (): JSX.Element => {
   }, [])
 
   /*
-   * filters results to suggest a more accurate list of user input
+   * filter results to suggest a more accurate list based on user input
    */
   const filterAndFormatResults = (results: RepoPayload[]): Repo[] => {
     const searchInput = searchValue.trim()
@@ -111,6 +115,7 @@ const SearchRepo = (): JSX.Element => {
         message: 'Storage limit reached!',
         description:
           'Remove elements from the table to keep adding, you are allowed to add up to 10 items.',
+        status: 'error',
       })
       //Duplicates validation
     } else if (reposList?.length && reposList.find((item: Repo) => item.id === repo.id)) {
@@ -118,14 +123,28 @@ const SearchRepo = (): JSX.Element => {
       setAlertInfo({
         message: 'Duplicated Repository!',
         description: 'This repository already exist, try adding a diffetent one.',
+        status: 'error',
       })
       // Saves selection to DB
     } else if (getIsReposerverRunning()) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { name, description, ...restOfRepo } = repo
       const response = await actions.addRepo(restOfRepo)
-      if (response?.id)
+      setIsAlertVisible(true)
+      if (response?.id) {
         setReposListResults(reposListResults.filter((item: Repo) => item.id !== repo.id)) //Removes selected repo from dropdown list
+        setAlertInfo({
+          message: `${response?.name} was successfully added!`,
+          description: '',
+          status: 'success',
+        })
+      } else {
+        setAlertInfo({
+          message: `Failed adding repo to the list!`,
+          description: '',
+          status: 'error',
+        })
+      }
     }
   }
 
@@ -141,7 +160,7 @@ const SearchRepo = (): JSX.Element => {
         isOpen={isAlertVisible}
         message={alertInfo.message}
         description={alertInfo.description}
-        status="error"
+        status={alertInfo.status}
         onClose={() => setIsAlertVisible(false)}
       />
       <Container p={8}>
@@ -179,7 +198,9 @@ const SearchRepo = (): JSX.Element => {
         )}
         {showNoResultsMessage && (
           <Box display="flex" justifyContent="center" my={20}>
-            <Text fontSize="sm">No results where found for: '{searchValue}'</Text>
+            <Text fontSize="sm" color="orange.500">
+              No results where found for: '{searchValue}'
+            </Text>
           </Box>
         )}
         {reposListResults?.length > 0 && !isLoading && (
