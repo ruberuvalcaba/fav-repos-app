@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Container, Input, Box, Spinner, Text } from '@chakra-ui/react'
-import { SearchIcon, CloseIcon } from '@chakra-ui/icons'
+import { SearchIcon, CloseIcon, WarningTwoIcon } from '@chakra-ui/icons'
 import SearchRepoResults from './RepoSearchResults'
 import { RepoContext } from '../../store/ReposStore'
 import API from '../../api'
@@ -13,11 +13,34 @@ const SearchRepo = (): JSX.Element => {
   const [reposListResults, setReposListResults] = useState<Repo[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isAlertVisible, setIsAlertVisible] = useState<boolean>(false)
-  const [showNoResultsMessage, setShowNoResultsMessage] = useState(false)
+  const [showNoResultsMessage, setShowNoResultsMessage] = useState<boolean>(false)
+  const [isServerRunning, setIsServerRunning] = useState<boolean>(false)
   const [alertInfo, setAlertInfo] = useState({ message: '', description: '' })
   const { state, actions } = useContext(RepoContext)
   const { reposList } = state
   const debouncedSearchValue = useDebounce(searchValue, 400)
+
+  /**
+   * Helps on preventing interaction with the server when it isn't running.
+   */
+  const getIsReposerverRunning = async () => {
+    const response = await API.healthCheck()
+    if (response && response?.status === 200) {
+      setIsServerRunning(true)
+      return true
+    } else {
+      setIsServerRunning(false)
+      return false
+    }
+    return
+  }
+
+  /*
+   * Makes a health check on loading before allowing users to start searching for repos
+   */
+  useEffect(() => {
+    getIsReposerverRunning()
+  }, [])
 
   /*
    * filters results to suggest a more accurate list of user input
@@ -97,7 +120,7 @@ const SearchRepo = (): JSX.Element => {
         description: 'This repository already exist, try adding a diffetent one.',
       })
       // Saves selection to DB
-    } else {
+    } else if (getIsReposerverRunning()) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { name, description, ...restOfRepo } = repo
       const response = await actions.addRepo(restOfRepo)
@@ -112,7 +135,7 @@ const SearchRepo = (): JSX.Element => {
     setShowNoResultsMessage(false)
   }
 
-  return (
+  return isServerRunning ? (
     <>
       <AlertBar
         isOpen={isAlertVisible}
@@ -164,6 +187,14 @@ const SearchRepo = (): JSX.Element => {
         )}
       </Container>
     </>
+  ) : (
+    <Box display="flex" justifyContent="center" textAlign="center" p={8} my={20}>
+      <Text fontSize="sm" color="orange.500">
+        <WarningTwoIcon color="orange.500" mr={1} w={5} h={5} />
+        {`Make sure to start REPOSERVER first.`} <br />
+        {`Once started, roload the page to use the app!`}
+      </Text>
+    </Box>
   )
 }
 

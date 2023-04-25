@@ -25,7 +25,7 @@ const api = async ({
       })
       return result.data
     } else {
-      const apiUrl = `http://localhost:8080/repo/${subRoute}`
+      const apiUrl = `http://localhost:8080/${subRoute}`
 
       const fetchOptions = {
         method,
@@ -39,7 +39,7 @@ const api = async ({
       }
       const response = await fetch(apiUrl, fetchOptions)
 
-      return method !== 'DELETE' ? response.json() : response
+      return method !== 'DELETE' && subRoute !== 'health' ? response.json() : response
     }
   } catch (error) {
     console.error('ERROR:', error)
@@ -49,6 +49,13 @@ const api = async ({
 
 const API = (() => {
   return {
+    async healthCheck(): Promise<any> {
+      const response = await api({
+        method: 'GET',
+        subRoute: 'health',
+      })
+      return response
+    },
     async searchAll(searchTerm: string): Promise<any> {
       const response = await api({
         isSearch: true,
@@ -61,6 +68,7 @@ const API = (() => {
     async getReposList(): Promise<Repo> {
       const response = await api({
         method: 'GET',
+        subRoute: 'repo/',
       })
 
       return response.repos
@@ -68,6 +76,7 @@ const API = (() => {
     async addRepo(repoPayload: Repo): Promise<Repo> {
       const response = await api({
         method: 'POST',
+        subRoute: 'repo/',
         body: repoPayload,
       })
 
@@ -76,7 +85,7 @@ const API = (() => {
     async removeRepo(id: string): Promise<GenericResponse> {
       const response = await api({
         method: 'DELETE',
-        subRoute: id,
+        subRoute: `repo/${id}`,
       })
       return response
     },
