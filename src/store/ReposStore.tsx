@@ -42,7 +42,7 @@ const reducer = (state: State, action: Dispatch) => {
       const { reposList } = state
       return {
         ...state,
-        reposList: [...reposList, action.value],
+        reposList: reposList?.length ? [...reposList, action.value] : [action.value],
       }
     }
     case types.REMOVE_REPO_SUCCESS: {

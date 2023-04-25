@@ -9,13 +9,13 @@ import {
   Button,
 } from '@chakra-ui/react'
 
-interface AlertBarProps {
+interface DeleteAlertProps {
   isOpen: boolean
   onClose: () => void
   onAccept: () => void
 }
 
-const DeleteAlert = ({ isOpen, onClose, onAccept }: AlertBarProps): JSX.Element => {
+const DeleteAlert = ({ isOpen, onClose, onAccept }: DeleteAlertProps): JSX.Element => {
   const cancelRef = useRef()
 
   return (
@@ -33,7 +33,7 @@ const DeleteAlert = ({ isOpen, onClose, onAccept }: AlertBarProps): JSX.Element 
               Cancel
             </Button>
             <Button colorScheme="red" onClick={onAccept} ml={3}>
-              Delete
+              Remove
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

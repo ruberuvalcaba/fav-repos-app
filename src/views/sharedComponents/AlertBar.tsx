@@ -1,26 +1,36 @@
 import React from 'react'
 import { Box, Alert, AlertIcon, AlertTitle, AlertDescription, CloseButton } from '@chakra-ui/react'
+import { AlerBarStatus } from '../../types'
 
 interface AlertBarProps {
+  isOpen: boolean
   message: string
   description?: string
-  status?: 'error' | 'info' | 'warning' | 'success' | 'loading'
+  status?: AlerBarStatus
   onClose: () => void
 }
 
 const AlertBar = ({
+  isOpen = false,
   message,
   status = 'error',
   description,
   onClose,
 }: AlertBarProps): JSX.Element => {
-  return (
+  if (isOpen) {
+    setTimeout(() => {
+      onClose()
+    }, 4000)
+  }
+  return isOpen ? (
     <Alert
       status={status}
       style={{
         display: 'flex',
         justifyContent: 'space-between',
         position: 'absolute',
+        top: 0,
+        left: 0,
         zIndex: '1',
       }}
     >
@@ -39,7 +49,7 @@ const AlertBar = ({
         onClick={onClose}
       />
     </Alert>
-  )
+  ) : null
 }
 
 export default AlertBar

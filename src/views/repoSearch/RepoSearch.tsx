@@ -114,14 +114,13 @@ const SearchRepo = (): JSX.Element => {
 
   return (
     <>
-      {isAlertVisible && (
-        <AlertBar
-          message={alertInfo.message}
-          description={alertInfo.description}
-          status="error"
-          onClose={() => setIsAlertVisible(false)}
-        />
-      )}
+      <AlertBar
+        isOpen={isAlertVisible}
+        message={alertInfo.message}
+        description={alertInfo.description}
+        status="error"
+        onClose={() => setIsAlertVisible(false)}
+      />
       <Container p={8}>
         <Box display="flex" alignItems="center">
           <SearchIcon w={5} h={5} color="gray.300" />

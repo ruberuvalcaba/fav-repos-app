@@ -5,6 +5,7 @@ import AlertBar from '../AlertBar'
 it('AlertBar component renders correctly', () => {
   const component = renderer.create(
     <AlertBar
+      isOpen={false}
       message="Message Test"
       description="Description Test"
       status="error"
