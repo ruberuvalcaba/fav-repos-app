@@ -1,4 +1,4 @@
-import * as types from './repoTypes'
+import * as types from './actionTypes'
 import API from '../api'
 import { Repo, SortOrder } from '../types'
 

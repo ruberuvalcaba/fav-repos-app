@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import * as types from '../actions/repoTypes'
+import * as types from '../actions/actionTypes'
 import { useRepoActions } from '../actions'
 import { Repo, State, Dispatch, GenericResponse, SortOrder } from '../types'
 
