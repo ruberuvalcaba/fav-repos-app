@@ -23,7 +23,7 @@ const DeleteAlert = ({ isOpen, onClose, onAccept }: AlertBarProps): JSX.Element 
       <AlertDialogOverlay>
         <AlertDialogContent>
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
-            Delete Repo from collection
+            Deleting repo from collection!
           </AlertDialogHeader>
 
           <AlertDialogBody>Are you sure? You can't undo this action afterwards.</AlertDialogBody>

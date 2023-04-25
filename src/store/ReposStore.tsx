@@ -39,9 +39,10 @@ const reducer = (state: State, action: Dispatch) => {
       }
     }
     case types.ADD_REPO_SUCCESS: {
+      const { reposList } = state
       return {
         ...state,
-        reposList: [...state.reposList, action.value],
+        reposList: [...reposList, action.value],
       }
     }
     case types.REMOVE_REPO_SUCCESS: {
