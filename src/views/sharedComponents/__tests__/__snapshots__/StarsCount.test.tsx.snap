@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StarsCount component renders correctly 1`] = `
+[
+  <style
+    dangerouslySetInnerHTML={
+      {
+        "__html": ".css-70qvj9{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}",
+      }
+    }
+    data-emotion="css 70qvj9"
+  />,
+  <div
+    className="css-70qvj9"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        {
+          "__html": ".css-2n4y2f{display:inline-block;line-height:1em;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;color:gray.300;vertical-align:middle;width:4px;height:4px;margin-right:1px;}",
+        }
+      }
+      data-emotion="css 2n4y2f"
+    />
+    <svg
+      className="chakra-icon css-2n4y2f"
+      focusable={false}
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M23.555,8.729a1.505,1.505,0,0,0-1.406-.98H16.062a.5.5,0,0,1-.472-.334L13.405,1.222a1.5,1.5,0,0,0-2.81,0l-.005.016L8.41,7.415a.5.5,0,0,1-.471.334H1.85A1.5,1.5,0,0,0,.887,10.4l5.184,4.3a.5.5,0,0,1,.155.543L4.048,21.774a1.5,1.5,0,0,0,2.31,1.684l5.346-3.92a.5.5,0,0,1,.591,0l5.344,3.919a1.5,1.5,0,0,0,2.312-1.683l-2.178-6.535a.5.5,0,0,1,.155-.543l5.194-4.306A1.5,1.5,0,0,0,23.555,8.729Z"
+        fill="currentColor"
+      />
+    </svg>
+    <style
+      dangerouslySetInnerHTML={
+        {
+          "__html": ".css-fyr1uu{font-size:2xs;color:blackAlpha.700;}",
+        }
+      }
+      data-emotion="css fyr1uu"
+    />
+    <p
+      className="chakra-text css-fyr1uu"
+    >
+      4k
+    </p>
+  </div>,
+]
+`;

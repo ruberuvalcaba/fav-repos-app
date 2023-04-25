@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextWithEllipsis component renders correctly 1`] = `
+[
+  <style
+    dangerouslySetInnerHTML={
+      {
+        "__html": ".css-1wiw5gj{font-size:xs;}.css-1wiw5gj:hover,.css-1wiw5gj[data-hover]{overflow:visible;}",
+      }
+    }
+    data-emotion="css 1wiw5gj"
+  />,
+  <p
+    className="chakra-text css-1wiw5gj"
+    style={
+      {
+        "display": "block",
+        "overflow": "hidden",
+        "textOverflow": "ellipsis",
+        "whiteSpace": "nowrap",
+        "width": "100px",
+      }
+    }
+  >
+    This is a text example with ellipsis
+  </p>,
+]
+`;

@@ -1,0 +1,220 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FavReposManager component renders correctly 1`] = `
+[
+  <style
+    dangerouslySetInnerHTML={
+      {
+        "__html": ".css-1l9fyxf{display:grid;grid-template-areas:"header header" "nav main" "nav footer";grid-gap:1px;grid-template-rows:50px 1fr 30px;grid-template-columns:400px 1fr;height:100vh;color:blackAlpha.700;}",
+      }
+    }
+    data-emotion="css 1l9fyxf"
+  />,
+  <div
+    className="css-1l9fyxf"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        {
+          "__html": ".css-1bqm7ji{grid-area:header;padding:4px;background:gray.700;color:white;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;text-align:center;}",
+        }
+      }
+      data-emotion="css 1bqm7ji"
+    />
+    <div
+      className="css-1bqm7ji"
+    >
+      Search and Collect your Favorite GitHub Repositories
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        {
+          "__html": ".css-elmxqh{grid-area:nav;background:gray.50;}",
+        }
+      }
+      data-emotion="css elmxqh"
+    />
+    <div
+      className="css-elmxqh"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          {
+            "__html": ".css-wxprr5{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;text-align:center;padding:8px;margin-top:20px;margin-bottom:20px;}",
+          }
+        }
+        data-emotion="css wxprr5"
+      />
+      <div
+        className="css-wxprr5"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            {
+              "__html": ".css-19qgjkk{font-size:sm;color:orange.500;}",
+            }
+          }
+          data-emotion="css 19qgjkk"
+        />
+        <p
+          className="chakra-text css-19qgjkk"
+        >
+          <style
+            dangerouslySetInnerHTML={
+              {
+                "__html": ".css-1jwamw7{display:inline-block;line-height:1em;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;color:orange.500;vertical-align:middle;margin-right:1px;width:5px;height:5px;}",
+              }
+            }
+            data-emotion="css 1jwamw7"
+          />
+          <svg
+            className="chakra-icon css-1jwamw7"
+            focusable={false}
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M23.119,20,13.772,2.15h0a2,2,0,0,0-3.543,0L.881,20a2,2,0,0,0,1.772,2.928H21.347A2,2,0,0,0,23.119,20ZM11,8.423a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Zm1.05,11.51h-.028a1.528,1.528,0,0,1-1.522-1.47,1.476,1.476,0,0,1,1.448-1.53h.028A1.527,1.527,0,0,1,13.5,18.4,1.475,1.475,0,0,1,12.05,19.933Z"
+              fill="currentColor"
+            />
+          </svg>
+          Make sure to start REPOSERVER first.
+           
+          <br />
+          Once started, roload the page to use the app!
+        </p>
+      </div>
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        {
+          "__html": ".css-1wovutj{grid-area:main;padding:8px;background:white;overflow:auto;}",
+        }
+      }
+      data-emotion="css 1wovutj"
+    />
+    <div
+      className="css-1wovutj"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          {
+            "__html": ".css-zipzvv{display:block;white-space:nowrap;-webkit-overflow-scrolling:touch;overflow-x:auto;overflow-y:hidden;max-width:100%;}",
+          }
+        }
+        data-emotion="css zipzvv"
+      />
+      <div
+        className="chakra-table__container css-zipzvv"
+      >
+        <table
+          className="chakra-table css-0"
+        >
+          <style
+            dangerouslySetInnerHTML={
+              {
+                "__html": ".css-18i7bby{caption-side:bottom;}",
+              }
+            }
+            data-emotion="css 18i7bby"
+          />
+          <caption
+            className="css-18i7bby"
+          >
+            List of all your repos, you can store up to 10
+          </caption>
+          <thead
+            className="css-0"
+          >
+            <tr
+              className="css-0"
+            >
+              <th
+                className="css-0"
+              >
+                Name
+              </th>
+              <th
+                className="css-0"
+              >
+                Language
+              </th>
+              <th
+                className="css-0"
+              >
+                Url
+              </th>
+              <style
+                dangerouslySetInnerHTML={
+                  {
+                    "__html": ".css-1wxd1cy{cursor:pointer;width:130px;}",
+                  }
+                }
+                data-emotion="css 1wxd1cy"
+              />
+              <th
+                className="css-1wxd1cy"
+                onClick={[Function]}
+              >
+                Created at 
+              </th>
+              <style
+                dangerouslySetInnerHTML={
+                  {
+                    "__html": ".css-tvbea5{cursor:pointer;width:101px;}",
+                  }
+                }
+                data-emotion="css tvbea5"
+              />
+              <th
+                className="css-tvbea5"
+                onClick={[Function]}
+              >
+                Stars 
+              </th>
+              <style
+                dangerouslySetInnerHTML={
+                  {
+                    "__html": ".css-1pom12u{-webkit-padding-start:0px;padding-inline-start:0px;-webkit-padding-end:0px;padding-inline-end:0px;}",
+                  }
+                }
+                data-emotion="css 1pom12u"
+              />
+              <th
+                className="css-1pom12u"
+              />
+            </tr>
+          </thead>
+          <tbody
+            className="css-0"
+          />
+        </table>
+      </div>
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        {
+          "__html": ".css-1jo0lao{grid-area:footer;-webkit-padding-start:4px;padding-inline-start:4px;-webkit-padding-end:4px;padding-inline-end:4px;padding-top:2px;padding-bottom:2px;background:gray.50;}",
+        }
+      }
+      data-emotion="css 1jo0lao"
+    />
+    <div
+      className="css-1jo0lao"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          {
+            "__html": ".css-18z4f6r{font-size:2xs;color:blackAlpha.500;}",
+          }
+        }
+        data-emotion="css 18z4f6r"
+      />
+      <p
+        className="chakra-text css-18z4f6r"
+      >
+        JPMorgan Chase - The Infatuation | Take Home Challenge by Ruben Ruvalcaba
+      </p>
+    </div>
+  </div>,
+]
+`;

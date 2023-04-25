@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RepoLibraryHeader component renders correctly 1`] = `
+<table
+  className="chakra-table css-0"
+>
+  <thead
+    className="css-0"
+  >
+    <tr
+      className="css-0"
+    >
+      <th
+        className="css-0"
+      >
+        Name
+      </th>
+      <th
+        className="css-0"
+      >
+        Language
+      </th>
+      <th
+        className="css-0"
+      >
+        Url
+      </th>
+      <style
+        dangerouslySetInnerHTML={
+          {
+            "__html": ".css-1wxd1cy{cursor:pointer;width:130px;}",
+          }
+        }
+        data-emotion="css 1wxd1cy"
+      />
+      <th
+        className="css-1wxd1cy"
+        onClick={[Function]}
+      >
+        Created at 
+      </th>
+      <style
+        dangerouslySetInnerHTML={
+          {
+            "__html": ".css-tvbea5{cursor:pointer;width:101px;}",
+          }
+        }
+        data-emotion="css tvbea5"
+      />
+      <th
+        className="css-tvbea5"
+        onClick={[Function]}
+      >
+        Stars 
+      </th>
+      <style
+        dangerouslySetInnerHTML={
+          {
+            "__html": ".css-1pom12u{-webkit-padding-start:0px;padding-inline-start:0px;-webkit-padding-end:0px;padding-inline-end:0px;}",
+          }
+        }
+        data-emotion="css 1pom12u"
+      />
+      <th
+        className="css-1pom12u"
+      />
+    </tr>
+  </thead>
+</table>
+`;

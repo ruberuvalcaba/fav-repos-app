@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RepoLibrary component renders correctly 1`] = `
+[
+  <style
+    dangerouslySetInnerHTML={
+      {
+        "__html": ".css-zipzvv{display:block;white-space:nowrap;-webkit-overflow-scrolling:touch;overflow-x:auto;overflow-y:hidden;max-width:100%;}",
+      }
+    }
+    data-emotion="css zipzvv"
+  />,
+  <div
+    className="chakra-table__container css-zipzvv"
+  >
+    <table
+      className="chakra-table css-0"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          {
+            "__html": ".css-18i7bby{caption-side:bottom;}",
+          }
+        }
+        data-emotion="css 18i7bby"
+      />
+      <caption
+        className="css-18i7bby"
+      >
+        List of all your repos, you can store up to 10
+      </caption>
+      <thead
+        className="css-0"
+      >
+        <tr
+          className="css-0"
+        >
+          <th
+            className="css-0"
+          >
+            Name
+          </th>
+          <th
+            className="css-0"
+          >
+            Language
+          </th>
+          <th
+            className="css-0"
+          >
+            Url
+          </th>
+          <style
+            dangerouslySetInnerHTML={
+              {
+                "__html": ".css-1wxd1cy{cursor:pointer;width:130px;}",
+              }
+            }
+            data-emotion="css 1wxd1cy"
+          />
+          <th
+            className="css-1wxd1cy"
+            onClick={[Function]}
+          >
+            Created at 
+          </th>
+          <style
+            dangerouslySetInnerHTML={
+              {
+                "__html": ".css-tvbea5{cursor:pointer;width:101px;}",
+              }
+            }
+            data-emotion="css tvbea5"
+          />
+          <th
+            className="css-tvbea5"
+            onClick={[Function]}
+          >
+            Stars 
+          </th>
+          <style
+            dangerouslySetInnerHTML={
+              {
+                "__html": ".css-1pom12u{-webkit-padding-start:0px;padding-inline-start:0px;-webkit-padding-end:0px;padding-inline-end:0px;}",
+              }
+            }
+            data-emotion="css 1pom12u"
+          />
+          <th
+            className="css-1pom12u"
+          />
+        </tr>
+      </thead>
+      <tbody
+        className="css-0"
+      />
+    </table>
+  </div>,
+]
+`;
