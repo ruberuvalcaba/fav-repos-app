@@ -38,12 +38,6 @@
     "lint": "yarn eslint . --ext .js,.jsx,.ts,.tsx",
     "postinstall": "husky install"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn test"
-    }
-  },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
       "eslint --fix"
