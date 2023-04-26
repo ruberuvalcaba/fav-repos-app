@@ -134,7 +134,7 @@ const SearchRepo = (): JSX.Element => {
       if (response?.id) {
         setReposListResults(reposListResults.filter((item: Repo) => item.id !== repo.id)) //Removes selected repo from dropdown list
         setAlertInfo({
-          message: `${response?.name} was successfully added!`,
+          message: `${response?.fullName} was successfully added!`,
           description: '',
           status: 'success',
         })
