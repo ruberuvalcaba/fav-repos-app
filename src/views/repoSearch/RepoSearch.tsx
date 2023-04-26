@@ -213,7 +213,7 @@ const SearchRepo = (): JSX.Element => {
       <Text fontSize="sm" color="orange.500">
         <WarningTwoIcon color="orange.500" mr={1} w={5} h={5} />
         {`Make sure to start REPOSERVER first.`} <br />
-        {`Once started, roload the page to use the app!`}
+        {`Once started, reload the page to use the app!`}
       </Text>
     </Box>
   )
